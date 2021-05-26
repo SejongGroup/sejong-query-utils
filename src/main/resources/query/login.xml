@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.rog/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="login">
+
+	<select id="actionLogin" parameterType="com.kakao.datavisualization.model.MemberVO" resultType="Integer">
+		SELECT count(*)
+		FROM TB_UTIL_MEMBER
+		WHERE USERID = #{userId} AND USERPW = #{userPw}
+	</select>
+	
+	<insert id="register" parameterType="com.kakao.datavisualization.model.MemberVO">
+		INSERT INTO TB_UTIL_MEMBER(USERID, USERPW, USEREMAIL, PHONENUMBER)
+		VALUES (#{userId}, #{userPw}, #{userEmail}, #{phoneNumber})
+	</insert>
+	
+</mapper>

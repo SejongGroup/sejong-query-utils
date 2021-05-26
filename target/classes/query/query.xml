@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.rog/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="query">
+	<select id="querySequence" resultType="Integer">
+		SELECT SEQ_QUERY.nextval
+		FROM dual
+	</select>
+
+	<select id="getQuery" parameterType="com.kakao.datavisualization.model.MemberVO" resultType="com.kakao.datavisualization.model.QueryVO2">
+		SELECT *
+		FROM TB_UTIL_QUERY
+		WHERE USERID LIKE #{userId}
+	</select>
+	
+	<insert id="createQuery" parameterType="Hashmap">
+		INSERT INTO TB_UTIL_QUERY(SEQUENCE, USERID, QUERY, PARAM, TITLE)
+		VALUES (#{sequence}, #{userId}, #{query}, #{param}, #{title})
+	</insert>
+	
+	<select id="selectQuery" parameterType="Integer" resultType="com.kakao.datavisualization.model.QueryVO2">
+		SELECT *
+		FROM TB_UTIL_QUERY
+		WHERE SEQUENCE = #{sequence}
+	</select>
+	
+	<insert id="updateQuery" parameterType="Hashmap">
+		UPDATE TB_UTIL_QUERY
+		SET QUERY = #{query}, 
+			PARAM = #{param},
+			TITLE = #{title}
+		WHERE SEQUENCE = #{sequence}
+	</insert>
+	
+	<select id="commandSelect" parameterType="Hashmap" resultType="map">
+		${sql}
+	</select>
+	
+	<insert id="commandInsert" parameterType="Hashmap">
+		${sql}
+	</insert>
+	
+	<delete id="commandDelete" parameterType="Hashmap">
+		${sql}
+	</delete>
+	
+	<update id="commandUpdate" parameterType="Hashmap">
+		${sql}
+	</update>
+</mapper>
