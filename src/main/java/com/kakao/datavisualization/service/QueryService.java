@@ -6,16 +6,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kakao.datavisualization.common.DatabaseConfigure;
 import com.kakao.datavisualization.dao.QueryDAO;
+import com.kakao.datavisualization.dao.SqlDriverDAO;
 import com.kakao.datavisualization.model.DataResponseBody;
 import com.kakao.datavisualization.model.MemberVO;
 import com.kakao.datavisualization.model.QueryResultVO;
 import com.kakao.datavisualization.model.QueryVO;
 import com.kakao.datavisualization.model.QueryVO2;
 import com.kakao.datavisualization.model.ResultVO;
+import com.kakao.datavisualization.model.SqlDriverVO;
 import com.kakao.datavisualization.util.CommonUtil;
 
 @Service
@@ -23,6 +27,9 @@ public class QueryService {
 	
 	@Autowired
 	QueryDAO queryDAO;
+	
+	@Autowired
+	SqlDriverDAO sqlDriverDAO;
 	
 	public DataResponseBody getQuery(MemberVO member) {
 		DataResponseBody responseVO = new DataResponseBody();
@@ -154,17 +161,22 @@ public class QueryService {
 		String dmlString = preDataSql.substring(0, 6);
 		List<Map<String, Object>> result = null;
 		
-		if (dmlString.equals("SELECT")) {
-			result = queryDAO.commandR(hm);
-			System.out.println("SELECT 끝남");
+		/* session */
+		SqlDriverVO sqlDriverVO = sqlDriverDAO.selectDriver(queryVO.getDatabaseurl());
+		SqlSession session = DatabaseConfigure.sqlSessionTemplate(sqlDriverVO.getDatabaseurl(), sqlDriverVO.getDatabaseid(), sqlDriverVO.getDatabasepw());
+		
+		if (dmlString.equals("SELECT") || dmlString.equals("select")) {
+			result = queryDAO.commandSelect(hm, session);
 			result = CommonUtil.paramNullCheck(result);
 		} else {
 			Map<String, Object> map = new HashMap<String, Object>();
 			result = new ArrayList<Map<String, Object>>();
-			String res = queryDAO.commandCUD(hm, dmlString);
+			String res = queryDAO.commandCUD(hm, dmlString, session);
 			map.put("result", res);
 			result.add(map);
 		}
+		
+		session.close();
 		QueryResultVO queryResultVO = new QueryResultVO();
 		queryResultVO.setQueryresult(result);
 		

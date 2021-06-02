@@ -26,6 +26,7 @@ import com.kakao.datavisualization.model.QueryVO;
 import com.kakao.datavisualization.model.QueryVO2;
 import com.kakao.datavisualization.model.QueryVO2;
 import com.kakao.datavisualization.service.QueryService;
+import com.kakao.datavisualization.service.SqlDriverService;
 import com.kakao.datavisualization.util.CommonUtil;
 
 @Controller
@@ -33,6 +34,9 @@ import com.kakao.datavisualization.util.CommonUtil;
 public class QueryController {
 	@Autowired
 	QueryService queryService;
+	
+	@Autowired
+	SqlDriverService sqlDriverService;
 	
 	@Auth
 	@RequestMapping(value="", method=RequestMethod.GET)
@@ -88,6 +92,8 @@ public class QueryController {
 		
 		DataResponseBody responseVO = queryService.selectQuery(sequence);
 		responseVO.setMember(member);
+		
+		responseVO.setSqldriver(sqlDriverService.selectDriver());
 		
 		mav.addObject("data", responseVO);
 		mav.setViewName("query/create");
@@ -145,6 +151,7 @@ public class QueryController {
 			, @RequestParam(value="title", required=false) String title
 			, @RequestParam(value="query[]", required=false) List<String> query
 			, @RequestParam(value="param[]", required=false) List<String> param
+			, @RequestParam(value="databaseurl", required=false) String databaseurl
 			, @RequestBody String requestBody) throws IOException {
 		
 		QueryVO2 queryVO = (QueryVO2) CommonUtil.StringToObject(requestBody, QueryVO2.class);

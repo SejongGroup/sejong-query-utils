@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.rog/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+
+	<select id="selectFreeBoard" resultType="com.kakao.datavisualization.model.BoardVO">
+		SELECT *
+		FROM TB_UTIL_FREEBOARD
+		ORDER BY BNO DESC, REGDATE DESC 
+	</select>
+	
+	<insert id="insertFreeBoard" parameterType="com.kakao.datavisualization.model.BoardVO">
+		INSERT INTO TB_UTIL_FREEBOARD(BNO, TITLE, CONTENT, WRITER)
+		VALUES
+		(
+		(SELECT NVL(MAX(BNO)+1, 1) FROM TB_UTIL_FREEBOARD), #{title}, #{content}, #{writer}
+		)
+	</insert>
+	
+	<select id="viewfreeBoard" parameterType="hashmap" resultType="com.kakao.datavisualization.model.BoardVO">
+		SELECT * 
+		FROM TB_UTIL_FREEBOARD 
+		WHERE BNO = #{bno}
+	</select>
+
+	<delete id="deleteFreeBoard" parameterType="com.kakao.datavisualization.model.BoardVO">
+		DELETE FROM TB_UTIL_FREEBOARD
+		WHERE BNO = #{bno}
+	</delete>
+	
+	<update id="updateFreeBoard" parameterType="com.kakao.datavisualization.model.BoardVO">
+		UPDATE TB_UTIL_FREEBOARD
+		SET TITLE = #{title}, 
+			CONTENT = #{content}, 
+			REGDATE = SYSDATE
+		WHERE BNO = #{bno}
+	</update>
+</mapper>

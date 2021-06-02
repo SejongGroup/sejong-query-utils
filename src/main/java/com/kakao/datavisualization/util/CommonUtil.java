@@ -61,7 +61,6 @@ public class CommonUtil {
 			while(keys.hasNext() ){
 				String key = keys.next();
 				Object value = map.get(key);
-				System.out.println(value.toString());
 				if (map.get(key) == null || map.get(key).toString() == null) {
 					new_map.put(key, "null");
 					System.out.println("여기왕씀");

@@ -13,7 +13,9 @@ public class DataResponseBody {
 	private List<BoardVO> board;
 	private List<QueryVO> query;
 	private List<QueryVO2> query2;
+	private List<SqlDriverVO> sqldriver;
 	
+
 	public ResultVO getResult() {
 		return result;
 	}
@@ -43,5 +45,11 @@ public class DataResponseBody {
 	}
 	public void setQuery2(List<QueryVO2> query2) {
 		this.query2 = query2;
+	}
+	public List<SqlDriverVO> getSqldriver() {
+		return sqldriver;
+	}
+	public void setSqldriver(List<SqlDriverVO> sqldriver) {
+		this.sqldriver = sqldriver;
 	}
 }

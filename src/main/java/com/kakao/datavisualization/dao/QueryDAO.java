@@ -49,8 +49,18 @@ public class QueryDAO {
 		return null;
 	}
 
-	public List<Map<String, Object>> commandR(HashMap<String, String> hm) {
-		return sqlSession.selectList("query.commandSelect", hm);
+	public List<Map<String, Object>> commandSelect(HashMap<String, String> hm, SqlSession session) {
+		return session.selectList("commandquery.commandSelect", hm);
 	}
-	
+
+	public String commandCUD(HashMap<String, String> hm, String dmlString, SqlSession session) {
+		if (dmlString.equals("INSERT") || dmlString.equals("insert")) {
+			return String.valueOf(session.insert("commandquery.commandInsert", hm));
+		} else if (dmlString.equals("DELETE") || dmlString.equals("delete")) {
+			return String.valueOf(session.delete("commandquery.commandDelete", hm));
+		} else if (dmlString.equals("UPDATE") || dmlString.equals("update")) {
+			return String.valueOf(session.update("commandquery.commandUpdate", hm));
+		}
+		return null;
+	}
 }

@@ -17,6 +17,11 @@
                 <label for="exampleInputEmail1" class="form-label highlighter-rouge">제목</label>
                 <textarea name="title" id="title" class="form-control input-size-up" cols="30" rows="1"></textarea>
                 <br />
+                <label for="exampleInputEmail1" class="form-label highlighter-rouge">데이터베이스 URL</label><br>
+                <select name="databaseurl" id="databaseurl">
+                	
+                </select>
+                <br />
                 <label for="exampleInputEmail1" class="form-label highlighter-rouge">쿼리문</label>
                 <textarea name="query" id="query" class="form-control input-size-up" cols="30" rows="4"></textarea>
                 <br />
@@ -26,7 +31,8 @@
                 </div>
                 <div class="mb-3 post-content">
                   <label for="exampleInputEmail1" class="form-label highlighter-rouge">결과 값</label>
-                  <textarea id="result" class="form-control input-size-up" cols="30" rows="5" disabled></textarea>
+                  <div id="result" >
+                  </div>
                   <br>
                   <div class="center">
                     <button type="button" class="btn btn-primary btn-size-up"
@@ -36,6 +42,8 @@
             <script>
               $(function () {
                 let query = '<c:out value="${data.query2[0]}" />';
+                let sqldriver = '<c:out value="${data.sqldriver}" />';
+                
                 let param = '';
                 if (query != null) {
                   query = escapeParsr('<c:out value="${data.query2[0].query}" />');
@@ -65,9 +73,13 @@
                     $(current_form_id).find('#param').text(dbTostr(paramArray[index]));
                   }
                 }
-
-
-
+                
+                /* db url 추가 */
+                <c:forEach var="list" items="${data.sqldriver}">
+                	var option = "<option>" + '<c:out value="${list.databaseurl}" />' + "</option>"
+                	$(databaseurl).append(option)
+                	console.log('<c:out value="${list.databaseurl}" />')
+                </c:forEach>
               });
 
               function stringCount(text) {
@@ -133,7 +145,6 @@
                   param[index] = strTodb(client_param);
                 });
 
-                console.log('gdgd');
                 $.post("./query/createaction", {
                   'sequence': query_sequence,
                   'userId': userId,
@@ -141,8 +152,7 @@
                   'query': query,
                   'param': param
                 },
-
-
+                
                   function (data) {
                     alert("success");
                     $('#Contents').children().remove();

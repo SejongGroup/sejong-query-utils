@@ -11,7 +11,14 @@ public class QueryVO2 {
 	private String title;
 	private String query;
 	private String param;
+	private String databaseurl;
 	
+	public String getDatabaseurl() {
+		return databaseurl;
+	}
+	public void setDatabaseurl(String databaseurl) {
+		this.databaseurl = databaseurl;
+	}
 	public Integer getSequence() {
 		return sequence;
 	}

@@ -23,7 +23,6 @@ public class LoginService {
 			resultVO.setResultCode("999");
 			resultVO.setResultMessage("실패");
 		} else {
-			System.out.println("로그인 완료");
 			resultVO.setResultCode("000");
 			resultVO.setResultMessage("성공");
 		}

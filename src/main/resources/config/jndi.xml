@@ -10,7 +10,7 @@
 	<tx:annotation-driven proxy-target-class="true"/>
 	
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="jdbc/CBIZ_DB"></property>
+		<property name="jndiName" value="jdbc/LOCALHOST"></property>
 		<property name="resourceRef" value="true"></property>
 	</bean>
 	

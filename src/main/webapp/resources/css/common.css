@@ -105,3 +105,59 @@ nav img {
         display: none;
     }
 }
+
+table.type10 {
+  border-collapse: collapse;
+  text-align: left;
+  line-height: 1.5;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin: 20px 10px;
+}
+table.type10 thead th {
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  color: #fff;
+  background: #e7708d;
+  margin: 20px 10px;
+  text-align: center;
+}
+table.type10 tbody th {
+  width: 150px;
+  padding: 10px;
+  text-align: center;
+}
+table.type10 td {
+  width: 850px;
+  padding: 10px;
+  vertical-align: top;
+  text-align: center;
+}
+table.type10 .even {
+  background: #fdf3f5;
+}
+
+#result {
+	display: flex;
+	justify-content: center;
+}
+
+select {
+width: 100%;
+padding: .8em .5em;
+border: 1px solid #999;
+font-family: inherit;
+background: url('arrow.jpg') no-repeat 95% 50%;
+border-radius: 0px;
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+text-align: center;
+text-align-last: center;
+}
+
+select::-ms-expand {
+    display: none;
+}
