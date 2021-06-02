@@ -7,6 +7,7 @@
           <link href="${pageContext.request.contextPath}/resources/css/util.css" rel="stylesheet" type="text/css" />
           <div class="container util-page form">
             <a href="javascript:getAjaxNodate('./query/create')"> 쿼리생성 </a>
+            <a href="javascript:getAjaxNodate('./sqldriver/create')"> DB생성 </a>
             <table class="table table-striped">
               <thead>
                 <tr>

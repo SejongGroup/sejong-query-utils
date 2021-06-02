@@ -41,6 +41,15 @@
             </section>
             <script>
               $(function () {
+                /* db url 추가 */
+                <c:forEach var="list" items="${data.sqldriver}">
+                	console.log("gdgD")
+                	var option = "<option>" + '<c:out value="${list.databaseurl}" />' + "</option>"
+                	$(databaseurl).append(option)
+                	console.log('<c:out value="${list.databaseurl}" />')
+                </c:forEach>
+            	  
+            	  
                 let query = '<c:out value="${data.query2[0]}" />';
                 let sqldriver = '<c:out value="${data.sqldriver}" />';
                 
@@ -73,13 +82,7 @@
                     $(current_form_id).find('#param').text(dbTostr(paramArray[index]));
                   }
                 }
-                
-                /* db url 추가 */
-                <c:forEach var="list" items="${data.sqldriver}">
-                	var option = "<option>" + '<c:out value="${list.databaseurl}" />' + "</option>"
-                	$(databaseurl).append(option)
-                	console.log('<c:out value="${list.databaseurl}" />')
-                </c:forEach>
+            
               });
 
               function stringCount(text) {

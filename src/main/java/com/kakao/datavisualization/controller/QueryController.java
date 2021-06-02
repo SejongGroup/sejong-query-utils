@@ -72,6 +72,8 @@ public class QueryController {
 		DataResponseBody responseVO = queryService.getSequence();
 		responseVO.setMember(member);
 		
+		responseVO.setSqldriver(sqlDriverService.selectDriver());
+		
 		Gson gson = new Gson();
 		String json = gson.toJson(responseVO);
 		

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.rog/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sqldriver">
+	
+	<insert id="createdriver" parameterType="com.kakao.datavisualization.model.SqlDriverVO">
+		INSERT INTO TB_UTIL_SQLDRIVER(DATABASEURL, DATABASEID, DATABASEPW)
+		VALUES (#{databaseurl}, #{databaseid}, #{databasepw})
+	</insert>
+	
+	<select id="selectDriver" resultType="com.kakao.datavisualization.model.SqlDriverVO">
+		SELECT *
+		FROM TB_UTIL_SQLDRIVER
+	</select>
+	
+	<select id="selectDriverOne" resultType="com.kakao.datavisualization.model.SqlDriverVO">
+		SELECT *
+		FROM TB_UTIL_SQLDRIVER
+		where DATABASEURL = #{databaseurl}
+	</select>
+</mapper>
