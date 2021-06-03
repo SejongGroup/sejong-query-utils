@@ -14,13 +14,14 @@
             </div>
             <form id="tmpSendFrm_0" class="container util-page form" method="post">
               <div class="mb-3 post-content">
-                <label for="exampleInputEmail1" class="form-label highlighter-rouge">제목</label>
+                <label for="exampleInputEmail1" class="form-label highlighter-rouge" id="title_label">제목</label>
                 <textarea name="title" id="title" class="form-control input-size-up" cols="30" rows="1"></textarea>
                 <br />
                 <label for="exampleInputEmail1" class="form-label highlighter-rouge">데이터베이스 URL</label><br>
                 <select name="databaseurl" id="databaseurl">
                 	
                 </select>
+                <br />
                 <br />
                 <label for="exampleInputEmail1" class="form-label highlighter-rouge">쿼리문</label>
                 <textarea name="query" id="query" class="form-control input-size-up" cols="30" rows="4"></textarea>
@@ -33,7 +34,7 @@
                   <label for="exampleInputEmail1" class="form-label highlighter-rouge">결과 값</label>
                   <div id="result" >
                   </div>
-                  <br>
+                  <br />
                   <div class="center">
                     <button type="button" class="btn btn-primary btn-size-up"
                       onclick="postAjax_test($('#' + $(this).closest('div').closest('div').closest('form').attr('id')), './query/submit?responseType=html')">Submit</button>
@@ -80,6 +81,8 @@
                     console.log($(current_form_id))
                     $(current_form_id).find('#query').text(dbTostr(queryArray[index]));
                     $(current_form_id).find('#param').text(dbTostr(paramArray[index]));
+                    $(current_form_id).find('#title_label').remove();
+                    $(current_form_id).find('#title').remove();
                   }
                 }
             
