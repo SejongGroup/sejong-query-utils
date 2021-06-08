@@ -14,23 +14,23 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	
-	<!-- sejong Nexus -->
+	<!--  Nexus
     <repositories>
         <repository>
-            <id>nexus_jongsun</id>
-        	<url>http://172.16.81.49:8081/repository/sejong-group</url>
+            <id>nexus</id>
+        	<url></url>
         </repository>
     </repositories>
     
     <pluginRepositories>
         <pluginRepository>
-            <id>nexus_jongsun</id>
-            <url>http://172.16.81.49:8081/repository/sejong-group</url>
+            <id>nexus</id>
+            <url></url>
             <releases><enabled>true</enabled></releases>
             <snapshots><enabled>true</enabled></snapshots>
         </pluginRepository>
     </pluginRepositories>
-	
+	 -->
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -263,14 +263,16 @@
         </plugins>
     </build>
     
+	<!-- 넥서스 배포 
     <distributionManagement>
 		<repository>
-			<id>sejong-releases</id>
-			<url>http://172.16.81.49:8081/repository/sejong-releases/</url>
+			<id>releases</id>
+			<url>/</url>
 		</repository>
 		<snapshotRepository>
-			<id>sejong-snapshot</id>
-			<url>http://172.16.81.49:8081/repository/sejong-snapshot/</url>
+			<id>snapshot</id>
+			<url></url>
 		</snapshotRepository>
 	</distributionManagement>
+-->
 </project>
